@@ -1,9 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { 
   View, 
-  Text, 
-  Image,  
-  StatusBar,
+  Text,
   Animated,
   Easing
 } from 'react-native';
@@ -12,8 +11,14 @@ import IllustrationImg from '../../assets/illustration.png';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { styles } from './styles';
 
+
 export function SignIn(){
+  const navigation = useNavigation()
   const [position, setPosition] = useState(new Animated.Value(0));
+  
+  function handleSignIn() {
+    navigation.navigate('Home');
+  }
 
   const mooveLR = () => {
     Animated.timing(position, {
@@ -40,7 +45,6 @@ export function SignIn(){
 
   return(
     <View style={styles.container}>
-      <StatusBar barStyle="light-content"backgroundColor="transparent"translucent />
       <Animated.Image  source={IllustrationImg} style={styles.image} resizeMode="stretch" />
 
       <View style={styles.content}>
@@ -56,7 +60,7 @@ export function SignIn(){
           favoritos com seus amigos
         </Text>
 
-        <ButtonIcon title="Entrar com Discord" activeOpacity={0.7} />
+        <ButtonIcon title="Entrar com Discord" activeOpacity={0.7} onPress={handleSignIn} />
 
       </View>
     </View>
